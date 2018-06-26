@@ -1,0 +1,28 @@
+global_defs {
+}
+
+vrrp_script check_haproxy {
+  #script "/sbin/pidof haproxy"
+  script "/sbin/true"
+  interval 2
+  weight 2
+}
+
+vrrp_instance VIP_KEEPALIVED {
+  state <%= $keepalived::state %>
+  interface <%= $keepalived::interface %>
+  virtual_router_id <%= $keepalived::virtual_router_id %>
+  priority <%= $keepalived::priority %>
+  advert_int 1
+  authentication {
+    auth_type PASS
+    auth_pass <%= $keepalived::auth_pass %>
+  }
+  virtual_ipaddress {
+    <%= $keepalived::vip %>
+  }
+  track_script {
+    check_haproxy
+  }
+  track_interface { <%= $keepalived::interface %> }
+}

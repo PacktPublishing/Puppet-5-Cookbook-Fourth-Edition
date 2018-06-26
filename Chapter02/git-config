@@ -1,0 +1,6 @@
+user.name=Thomas Uphill
+user.email=thomas@narrabilis.com
+core.editor=vim
+merge.tool=vimdiff
+color.ui=true
+push.default=simple

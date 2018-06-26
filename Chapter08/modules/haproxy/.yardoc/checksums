@@ -1,0 +1,3 @@
+/home/thomas/.puppetlabs/etc/code/modules/haproxy/manifests/slave.pp 84cd779bd9280263a29f7badc780add7b1b1a2d4
+/home/thomas/.puppetlabs/etc/code/modules/haproxy/manifests/config.pp c7027dfc1e2203ff5d338c0cece085146be1e0e4
+/home/thomas/.puppetlabs/etc/code/modules/haproxy/manifests/master.pp 4d51ebfd5e9944d406290ea8517586523693a3c8

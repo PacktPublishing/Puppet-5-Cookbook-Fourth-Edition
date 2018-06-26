@@ -1,0 +1,40 @@
+define admin_user (
+  String                        $key,
+  Enum['ssh-rsa','ssh-ed25519'] $keytype,
+  Boolean                        $dotfiles = false,
+  ) {
+  user { $name:
+    ensure => present,
+  }
+  file { "/home/${name}/.ssh":
+    ensure => directory,
+    mode => '0700',
+    owner => "$name",
+    require => File["/home/${name}"],
+  }
+  ssh_authorized_key { "${name}_key":
+    key => $key,
+    type => "$keytype",
+    user => $name,
+    require => File["/home/${name}/.ssh"],
+  }
+  # dotfiles 
+  if $dotfiles == false {
+    # just create the directory 
+    file { "/home/${name}": ensure => 'directory',
+      mode => '0700',
+      owner => $name,
+      group => $name,
+      require => User["$name"] } 
+  } else {
+    # copy in all the files in the subdirectory
+    file { "/home/${name}":
+      recurse => true, 
+      mode    => '0700', 
+      owner   => $name,
+      group   => $name,
+      source  => "puppet:///modules/admin_user/${name}", 
+      require => User["$name"] 
+    }
+  } 
+}

@@ -1,0 +1,11 @@
+---
+# Hiera 5 Global configuration file
+
+version: 5
+hierarchy:
+  - name: "Per-host defaults"
+    path: "hosts/%{::facts.hostname}.yaml"
+  - name: "Per-OS defaults"
+    path: "os/%{::facts.os.family}.yaml"
+  - name: "Common data"
+    path: "common.yaml"

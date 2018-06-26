@@ -1,0 +1,8 @@
+Host git git.example.com
+  User git
+  IdentityFile /home/thomas/.ssh/git_rsa
+
+Host puppet.example.com puppet
+  Hostname puppet.example.com
+  IdentityFile ~/.ssh/puppet_rsa
+  User puppet

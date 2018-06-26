@@ -1,0 +1,51 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+$rhel = <<EOF
+rpm -q puppet-agent
+if [ $? -ne 0 ]; then 
+  yum install -y http://yum.puppet.com/puppet5/puppet5-release-el-7.noarch.rpm
+  yum install -y puppet-agent
+fi
+# setup vboxsf
+modprobe vboxsf
+if [ $? -ne 0 ]; then
+  yum install -y kernel-devel kernel-headers
+  yum update -y kernel
+fi
+
+EOF
+$debian = <<EOF
+dpkg -s puppet-agent >/dev/null
+if [ $? -ne 0 ]; then
+  wget https://apt.puppet.com/puppet5-release-stretch.deb
+  dpkg -i puppet5-release-stretch.deb
+  apt-get update
+  apt-get install -y puppet-agent
+fi
+EOF
+
+Vagrant.configure("2") do |config|
+  config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
+  config.vm.define "cookbook" do |cookbook| 
+    cookbook.vm.box = "centos/7"
+    cookbook.vm.provision "shell", inline: $rhel
+    cookbook.vm.provision :reload
+    cookbook.vm.provision "puppet"
+    cookbook.vm.hostname = "cookbook.example.com"
+    cookbook.vm.network "private_network", ip: "192.168.50.10", 
+      virtualbox__intnet: "puppet" 
+    cookbook.vm.provision :hosts 
+  end
+  config.vm.define "puppet" do |puppet|
+    puppet.vm.box = "centos/7"
+    puppet.vm.provision "shell", inline: $rhel
+    puppet.vm.hostname = "puppet.example.com"
+    puppet.vm.network "private_network", ip: "192.168.50.100",
+      virtualbox__intnet: "puppet"
+    puppet.vm.provider "virtualbox" do |v|
+      v.memory = 1500
+    end
+    puppet.vm.provision :hosts
+  end
+end

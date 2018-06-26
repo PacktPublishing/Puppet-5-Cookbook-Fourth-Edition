@@ -1,0 +1,7 @@
+forge "http://forge.puppetlabs.com"
+mod 'puppetlabs/puppetdb', '3.0.0'
+mod 'puppetlabs/stdlib', '3.2.0'
+mod 'puppetlabs/concat'
+mod 'puppetlabs/firewall'
+mod 'puppetlabs/lvm'
+mod 'puppetlabs/inifile'

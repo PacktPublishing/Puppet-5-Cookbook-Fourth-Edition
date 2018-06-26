@@ -1,0 +1,2 @@
+*.info;mail.none;authpriv.none;cron.none                /var/log/messages
+local7.*                                                /var/log/boot.log

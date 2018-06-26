@@ -1,0 +1,7 @@
+#!/bin/bash
+runhour=<%= split($facts['ipaddress'],'\.')[3] % 24 %>
+hour=$(date +%H)
+if [ "$runhour" -ne "$hour" ]; then
+ exit 0
+fi
+exec /usr/local/bin/dump_database
