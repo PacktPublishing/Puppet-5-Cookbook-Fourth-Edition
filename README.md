@@ -59,7 +59,7 @@ Thomas Uphill is an RHCA who has been using Puppet since version 0.24. He has be
 
 ## Other books by the authors
 * [Mastering Puppet](https://www.packtpub.com/networking-and-servers/mastering-puppet?utm_source=github&utm_campaign=9781783982189)
-* [Troubleshooting Puppet](https://www.packtpub.com/mapt/book/networking_and_servers/9781784398651?utm_source=github&utm_campaign=9781784398651)
+* [Troubleshooting Puppet](https://www.packtpub.com/networking-and-servers/troubleshooting-puppet?utm_source=github&utm_campaign=9781784398651)
 
 ### Suggestions and Feedback
 [Click here](https://docs.google.com/forms/d/e/1FAIpQLSdy7dATC6QmEL81FIUuymZ0Wy9vH1jHkvpY57OiMeKGqib_Ow/viewform) if you have any feedback or suggestions.
